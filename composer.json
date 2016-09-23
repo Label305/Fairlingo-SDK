@@ -1,0 +1,18 @@
+{
+    "name": "label305/fairlingo-sdk",
+    "description": "PHP SDK for Fairlingo.",
+    "keywords": ["SDK", "PHP"],
+    "license": "Apache-2",
+    "type": "library",
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fairlingo_SDK\\": "src/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
