@@ -6,14 +6,6 @@ use Fairlingo_SDK\Remote\Request;
 
 class GetLanguagesRequest extends Request
 {
-    /**
-     * GetLanguagesRequest constructor.
-     * @param $apiKey
-     */
-    public function __construct($apiKey)
-    {
-        $this->addHeader('Authorization: Bearer ' . $apiKey); //TODO interceptors
-    }
 
     /**
      * @return string

@@ -12,12 +12,10 @@ class GetOrderRequest extends Request
 
     /**
      * GetOrderRequest constructor.
-     * @param string $apiKey
      * @param int $orderId
      */
-    public function __construct($apiKey, $orderId)
+    public function __construct($orderId)
     {
-        $this->addHeader('Authorization: Bearer ' . $apiKey);
         $this->orderId = $orderId;
     }
 

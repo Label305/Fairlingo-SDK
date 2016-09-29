@@ -13,14 +13,11 @@ class SubmitOrderRequest extends Request
 
     /**
      * SubmitOrderRequest constructor.
-     * @param string $apiKey
      * @param int $orderDraftId
      */
     public function __construct(
-        string $apiKey,
         int $orderDraftId
     ) {
-        $this->addHeader('Authorization: Bearer ' . $apiKey);
         $this->orderDraftId = $orderDraftId;
     }
 
