@@ -14,6 +14,11 @@ class Connection
     private $curl;
 
     /**
+     * @var RequestInterceptor[] $interceptors
+     */
+     private $interceptors;
+
+    /**
      * @param      $url
      * @param Curl $curl
      */
@@ -24,6 +29,22 @@ class Connection
     }
 
     /**
+     * @return RequestInterceptor[]
+     */
+    public function getInterceptors()
+    {
+        return $this->interceptors;
+    }
+
+    /**
+     * @param RequestInterceptor[] $interceptors
+     */
+    public function setInterceptors($interceptors)
+    {
+        $this->interceptors = $interceptors;
+    }
+
+    /**
      * @param Request $request
      * @return RawResponse
      */
@@ -31,7 +52,11 @@ class Connection
     {
         $this->curl->init();
 
-        return $this->doCurl($this->url . $request->getEndpoint(), $request->getHeaders(), $request->getMethod(),
+        foreach ($this->getInterceptors() as $interceptor) {
+            $interceptor->intercept($request);
+        }
+
+        return $this->doCurl($this->url . $request->getEndpoint(), $request->getFormattedHeaders(), $request->getMethod(),
             $request->getPostParams(), $this->curl);
     }
 

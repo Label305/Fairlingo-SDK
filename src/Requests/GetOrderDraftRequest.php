@@ -12,12 +12,10 @@ class GetOrderDraftRequest extends Request
     private $id;
 
     /**
-     * @param string $apiKey
      * @param int $id
      */
-    public function __construct($apiKey, $id)
+    public function __construct($id)
     {
-        $this->addHeader('Authorization: Bearer ' . $apiKey);
         $this->id = $id;
     }
 

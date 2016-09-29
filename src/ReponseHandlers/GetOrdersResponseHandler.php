@@ -2,18 +2,18 @@
 
 namespace Fairlingo_SDK\ResponseHandlers;
 
+use Fairlingo_SDK\Data\Orders\Order;
 use Fairlingo_SDK\Transformers\OrderTransformer;
-use Fairlingo_SDK\Remote\ResponseHandler;
 
-class GetOrdersResponseHandler extends ResponseHandler
+class GetOrdersResponseHandler extends JsonResponseHandler
 {
 
     /**
-     * @return array
+     * @return Order[]
      */
     public function getHandledResponse()
     {
-        $response = json_decode($this->rawResponse->getRaw());
+        $response = parent::getHandledResponse();
         return OrderTransformer::toOrders($response);
     }
 
