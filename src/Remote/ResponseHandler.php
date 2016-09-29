@@ -15,6 +15,8 @@ abstract class ResponseHandler {
         $this->rawResponse = $rawResponse;
     }
 
-    abstract public function getHandledResponse();
+    public function getHandledResponse() {
+        return $this->rawResponse->getRaw();
+    }
     
 }

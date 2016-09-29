@@ -9,10 +9,12 @@ use Fairlingo_SDK\Remote\Exceptions\NoConnectionException;
 use Fairlingo_SDK\Requests\GetLanguagesRequest;
 use Fairlingo_SDK\Requests\GetOrderDraftRequest;
 use Fairlingo_SDK\Requests\GetOrderRequest;
+use Fairlingo_SDK\Requests\SubmitOrderDraftRequest;
 use Fairlingo_SDK\Requests\SubmitOrderRequest;
 use Fairlingo_SDK\ResponseHandlers\GetLanguagesResponseHandler;
 use Fairlingo_SDK\ResponseHandlers\GetOrderDraftResponseHandler;
 use Fairlingo_SDK\ResponseHandlers\GetOrderResponseHandler;
+use Fairlingo_SDK\ResponseHandlers\SubmitOrderDraftResponseHandler;
 use Fairlingo_SDK\ResponseHandlers\SubmitOrderResponseHandler;
 
 class FairlingoApi
@@ -20,7 +22,7 @@ class FairlingoApi
     /**
      * @var Connection
      */
-    public $connection;
+    private $connection;
 
     /**
      * @param Connection $connection
@@ -74,6 +76,19 @@ class FairlingoApi
         $request = new SubmitOrderRequest($orderDraftId);
         $rawResponse = $this->getConnection()->doRequest($request);
         $responseHandler = new SubmitOrderResponseHandler($rawResponse);
+        return $responseHandler->getHandledResponse();
+    }
+
+    /**
+     * @param OrderDraft $orderDraft
+     * @return OrderDraft
+     * @internal param int $orderDraftId
+     */
+    public function createOrderDraft(OrderDraft $orderDraft)
+    {
+        $request = new SubmitOrderDraftRequest($orderDraft);
+        $rawResponse = $this->getConnection()->doRequest($request);
+        $responseHandler = new SubmitOrderDraftResponseHandler($rawResponse);
         return $responseHandler->getHandledResponse();
     }
 

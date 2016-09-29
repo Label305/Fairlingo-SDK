@@ -17,6 +17,6 @@ class JsonResponseHandler extends ResponseHandler
      */
     public function getHandledResponse()
     {
-        return json_decode($this->rawResponse);
+        return json_decode($this->rawResponse->getRaw());
     }
 }
