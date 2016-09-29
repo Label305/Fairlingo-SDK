@@ -53,7 +53,7 @@ class Connection
         $this->curl->init();
 
         foreach ($this->getInterceptors() as $interceptor) {
-            $interceptor->intercept($request);
+            $request = $interceptor->intercept($request);
         }
 
         return $this->doCurl($this->url . $request->getEndpoint(), $request->getFormattedHeaders(), $request->getMethod(),
