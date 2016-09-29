@@ -2,14 +2,26 @@
     "name": "label305/fairlingo-sdk",
     "description": "PHP SDK for Fairlingo.",
     "keywords": ["SDK", "PHP"],
-    "license": "Apache-2",
+    "license": "Apache-2.0",
     "type": "library",
+    "authors": [
+        {
+            "name": "Nick Velthorst",
+            "email": "nick@label305.com"
+        }
+    ],
     "require": {
         "php": ">=7.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.4",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*"
+    },
     "autoload": {
         "psr-4": {
-            "Fairlingo_SDK\\": "src/"
+            "Fairlingo_SDK\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "config": {

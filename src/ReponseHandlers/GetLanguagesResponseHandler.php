@@ -2,18 +2,18 @@
 
 namespace Fairlingo_SDK\ResponseHandlers;
 
+use Fairlingo_SDK\Data\Languages\Language;
 use Fairlingo_SDK\Transformers\LanguageTransformer;
-use Fairlingo_SDK\Remote\ResponseHandler;
 
-class GetLanguagesResponseHandler extends ResponseHandler
+class GetLanguagesResponseHandler extends JsonResponseHandler
 {
 
     /**
-     * @return array
+     * @return Language[]
      */
     public function getHandledResponse()
     {
-        $response = json_decode($this->rawResponse->getRaw());
+        $response = parent::getHandledResponse();
         return LanguageTransformer::toLanguages($response);
     }
 

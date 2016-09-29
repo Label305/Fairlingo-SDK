@@ -23,19 +23,6 @@ class FairlingoApi
     public $connection;
 
     /**
-     * @var string
-     */
-    public $apiKey;
-
-    /**
-     * @param string $apiKey
-     */
-    public function setApiKey($apiKey)
-    {
-        $this->apiKey = $apiKey;
-    }
-
-    /**
      * @param Connection $connection
      */
     public function setConnection(Connection $connection)
@@ -60,7 +47,7 @@ class FairlingoApi
      */
     public function getLanguages()
     {
-        $request = new GetLanguagesRequest($this->apiKey);
+        $request = new GetLanguagesRequest();
         $rawResponse = $this->getConnection()->doRequest($request);
         $responseHandler = new GetLanguagesResponseHandler($rawResponse);
         return $responseHandler->getHandledResponse();
@@ -72,8 +59,8 @@ class FairlingoApi
      */
     public function getOrderDraft($id)
     {
-        $request = new GetOrderDraftRequest($this->apiKey, $id);
-        $rawResponse = $this->$this->getConnection()->doRequest($request);
+        $request = new GetOrderDraftRequest($id);
+        $rawResponse = $this->getConnection()->doRequest($request);
         $responseHandler = new GetOrderDraftResponseHandler($rawResponse);
         return $responseHandler->getHandledResponse();
     }
@@ -84,8 +71,8 @@ class FairlingoApi
      */
     public function createOrder($orderDraftId)
     {
-        $request = new SubmitOrderRequest($this->apiKey, $orderDraftId);
-        $rawResponse = $this->$this->getConnection()->doRequest($request);
+        $request = new SubmitOrderRequest($orderDraftId);
+        $rawResponse = $this->getConnection()->doRequest($request);
         $responseHandler = new SubmitOrderResponseHandler($rawResponse);
         return $responseHandler->getHandledResponse();
     }
@@ -96,8 +83,8 @@ class FairlingoApi
      */
     public function getOrder($orderId)
     {
-        $request = new GetOrderRequest($this->apiKey, $orderId);
-        $rawResponse = $this->$this->getConnection()->doRequest($request);
+        $request = new GetOrderRequest($orderId);
+        $rawResponse = $this->getConnection()->doRequest($request);
         $responseHandler = new GetOrderResponseHandler($rawResponse);
         return $responseHandler->getHandledResponse();
     }

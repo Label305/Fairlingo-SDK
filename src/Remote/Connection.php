@@ -14,6 +14,11 @@ class Connection
     private $curl;
 
     /**
+     * @var RequestInterceptor[] $interceptors
+     */
+     private $interceptors = [];
+
+    /**
      * @param      $url
      * @param Curl $curl
      */
@@ -24,6 +29,30 @@ class Connection
     }
 
     /**
+     * @return RequestInterceptor[]
+     */
+    public function getInterceptors()
+    {
+        return $this->interceptors;
+    }
+
+    /**
+     * @param RequestInterceptor[] $interceptors
+     */
+    public function setInterceptors($interceptors)
+    {
+        $this->interceptors = $interceptors;
+    }
+
+    /**
+     * @param RequestInterceptor $interceptor
+     */
+    public function addInterceptor($interceptor)
+    {
+        $this->interceptors[] = $interceptor;
+    }
+
+    /**
      * @param Request $request
      * @return RawResponse
      */
@@ -31,7 +60,11 @@ class Connection
     {
         $this->curl->init();
 
-        return $this->doCurl($this->url . $request->getEndpoint(), $request->getHeaders(), $request->getMethod(),
+        foreach ($this->getInterceptors() as $interceptor) {
+            $request = $interceptor->intercept($request);
+        }
+
+        return $this->doCurl($this->url . $request->getEndpoint(), $request->getFormattedHeaders(), $request->getMethod(),
             $request->getPostParams(), $this->curl);
     }
 
@@ -54,7 +87,7 @@ class Connection
         $curl->setOption(CURLOPT_HTTPHEADER, $headers);
         $curl->setOption(CURLOPT_FOLLOWLOCATION, true);
 
-        if ($httpMethod == "POST") {
+        if ($httpMethod == "POST" || $httpMethod == "PATCH") {
             $curl->setOption(CURLOPT_CUSTOMREQUEST, $httpMethod);
             $curl->setOption(CURLOPT_POSTFIELDS, json_encode($postParams));
             $curl->setOption(CURLOPT_RETURNTRANSFER, true);

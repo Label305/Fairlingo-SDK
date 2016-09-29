@@ -7,9 +7,6 @@ abstract class Request {
     /** @var array */
     protected $headers = [];
 
-    /** @var array */
-    protected $postParams = [];
-
     /**
      * @return string
      */
@@ -29,11 +26,25 @@ abstract class Request {
     }
 
     /**
-     * @param string $header
+     * Returns an array where the headers are formatted as: <header>: <value>
+     * @return array
      */
-    public function addHeader($header)
+    public function getFormattedHeaders()
     {
-        $this->headers[] = $header;
+        $formattedHeaders = [];
+        foreach ($this->getHeaders() as $key => $value) {
+            $formattedHeaders[] = sprintf("%s: %s", $key, $value);
+        }
+        return $formattedHeaders;
+    }
+
+    /**
+     * @param string $header
+     * @param $value
+     */
+    public function addHeader($header, $value)
+    {
+        $this->headers[$header] =  $value;
     }
 
     /**
@@ -41,15 +52,7 @@ abstract class Request {
      */
     public function getPostParams()
     {
-        return $this->postParams;
-    }
-
-    /**
-     * @param $postParam
-     */
-    public function addPostParam($postParam)
-    {
-        $this->postParams[] = $postParam;
+        return [];
     }
 
 }

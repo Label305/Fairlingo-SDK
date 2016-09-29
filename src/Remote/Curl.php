@@ -91,7 +91,7 @@ class Curl {
     public function checkHttpStatusOrFail()
     {
         $responseStatus = $this->getInfo(CURLINFO_HTTP_CODE);
-        if ($responseStatus != 200) {
+        if ($responseStatus < 200 && $responseStatus > 299) {
             throw new CurlException("Invalid response status: " . $responseStatus);
         }
     }
