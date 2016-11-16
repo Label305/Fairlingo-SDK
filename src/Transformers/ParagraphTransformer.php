@@ -27,6 +27,9 @@ class ParagraphTransformer
             if (isset($fairlingoParagraph->state)) {
                 $paragraph->setState($fairlingoParagraph->state);
             }
+            if (isset($fairlingoParagraph->msg_id)) {
+                $paragraph->setMsgId($fairlingoParagraph->msg_id);
+            }
             $paragraphs[] = $paragraph;
         }
 

@@ -15,6 +15,11 @@ class Language
      */
     private $name;
 
+    /**
+     * @var string $code
+     */
+    private $code;
+
     public function setId($id)
     {
         $this->id = $id;
@@ -42,6 +47,22 @@ class Language
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
 }

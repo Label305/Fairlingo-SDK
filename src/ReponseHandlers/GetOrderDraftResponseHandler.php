@@ -14,7 +14,12 @@ class GetOrderDraftResponseHandler extends JsonResponseHandler
     public function getHandledResponse()
     {
         $response = parent::getHandledResponse();
-        return OrderDraftTransformer::toOrderDraft($response);
+
+        if ($response != null) {
+            return OrderDraftTransformer::toOrderDraft($response);
+        }
+
+        return $response;
     }
 
 }

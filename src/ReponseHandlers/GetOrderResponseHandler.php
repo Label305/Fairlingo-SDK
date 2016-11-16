@@ -14,6 +14,11 @@ class GetOrderResponseHandler extends JsonResponseHandler
     public function getHandledResponse()
     {
         $response = parent::getHandledResponse();
-        return OrderTransformer::toOrder($response);
+
+        if ($response != null) {
+            return OrderTransformer::toOrder($response);
+        }
+
+        return $response;
     }
 }
