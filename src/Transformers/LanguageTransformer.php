@@ -33,6 +33,7 @@ class LanguageTransformer
 
         $language->setId($fairlingoLanguage->id);
         $language->setName($fairlingoLanguage->name);
+        $language->setCode($fairlingoLanguage->code);
 
         return $language;
     }

@@ -31,6 +31,11 @@ class Paragraph
     private $state;
 
     /**
+     * @var string
+     */
+    private $msgId;
+
+    /**
      * @return int
      */
     public function getId()
@@ -108,6 +113,22 @@ class Paragraph
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMsgId()
+    {
+        return $this->msgId;
+    }
+
+    /**
+     * @param string $msgId
+     */
+    public function setMsgId($msgId)
+    {
+        $this->msgId = $msgId;
     }
 
 
