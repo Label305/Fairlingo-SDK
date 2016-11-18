@@ -17,7 +17,7 @@ class LanguageTransformer
         $languages = [];
 
         foreach ($fairlingoLanguages as $fairlingoLanguage) {
-            $languages[$fairlingoLanguage->id] = $fairlingoLanguage->name;
+            $languages[] = self::toLanguage($fairlingoLanguage);
         }
 
         return $languages;
@@ -33,6 +33,7 @@ class LanguageTransformer
 
         $language->setId($fairlingoLanguage->id);
         $language->setName($fairlingoLanguage->name);
+        $language->setCode($fairlingoLanguage->code);
 
         return $language;
     }

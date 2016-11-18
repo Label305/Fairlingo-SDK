@@ -64,6 +64,7 @@ class Connection
             $request = $interceptor->intercept($request);
         }
 
+
         return $this->doCurl($this->url . $request->getEndpoint(), $request->getFormattedHeaders(), $request->getMethod(),
             $request->getPostParams(), $this->curl);
     }

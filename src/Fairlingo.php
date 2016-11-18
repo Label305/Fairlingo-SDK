@@ -82,7 +82,6 @@ class FairlingoApi
     /**
      * @param OrderDraft $orderDraft
      * @return OrderDraft
-     * @internal param int $orderDraftId
      */
     public function createOrderDraft(OrderDraft $orderDraft)
     {
