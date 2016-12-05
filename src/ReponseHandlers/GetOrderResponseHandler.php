@@ -15,7 +15,7 @@ class GetOrderResponseHandler extends JsonResponseHandler
     {
         $response = parent::getHandledResponse();
 
-        if ($response != null) {
+        if (property_exists($response, 'id')) {
             return OrderTransformer::toOrder($response);
         }
 
