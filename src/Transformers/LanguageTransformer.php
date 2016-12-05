@@ -33,7 +33,9 @@ class LanguageTransformer
 
         $language->setId($fairlingoLanguage->id);
         $language->setName($fairlingoLanguage->name);
-        $language->setCode($fairlingoLanguage->code);
+        if (property_exists($fairlingoLanguage, 'code')) {
+            $language->setCode($fairlingoLanguage->code);
+        }
 
         return $language;
     }
